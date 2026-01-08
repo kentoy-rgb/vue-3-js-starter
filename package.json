@@ -1,0 +1,23 @@
+{
+  "name": "my-vue-app",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.0",
+    "axios": "^1.4.0",
+    "pinia": "^2.1.0",
+    "quasar": "^2.12.0",
+    "vue": "^3.3.0",
+    "vue-router": "^4.2.0"
+  },
+  "devDependencies": {
+    "@quasar/vite-plugin": "^1.4.0",
+    "@vitejs/plugin-vue": "^4.2.0",
+    "sass": "^1.97.2",
+    "vite": "^4.3.0"
+  }
+}
