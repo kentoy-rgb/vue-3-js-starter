@@ -1,13 +1,13 @@
 <template>
   <div class="default-layout">
-    <header class="layout-header" :class="{ 'header--shifted': sidebarOpen }">
-      <button @click="sidebarOpen = !sidebarOpen" class="menu-toggle">☰</button>
+    <header class="layout-header" :class="{ 'header--shifted': sidebarOpen && !isAdminAuthenticated }">
+      <button v-if="!isAdminAuthenticated" @click="sidebarOpen = !sidebarOpen" class="menu-toggle">☰</button>
       <img src="/logo.png" alt="Purok Lapad Bato Logo" class="logo" />
     </header>
     
-    <Sidebar v-model="sidebarOpen" />
+    <Sidebar v-if="!isAdminAuthenticated" v-model="sidebarOpen" />
     
-    <main class="layout-content" :class="{ 'content--shifted': sidebarOpen }">
+    <main class="layout-content" :class="{ 'content--shifted': sidebarOpen && !isAdminAuthenticated }">
       <slot />
     </main>
     
@@ -18,6 +18,7 @@
 <script>
 import Sidebar from '@/components/common/Sidebar.vue'
 import Footer from '@/components/common/Footer.vue'
+import { adminStore } from '@/store/admin.js'
 
 export default {
   name: 'DefaultLayout',
@@ -28,6 +29,11 @@ export default {
   data() {
     return {
       sidebarOpen: false
+    }
+  },
+  computed: {
+    isAdminAuthenticated() {
+      return adminStore.isAuthenticated
     }
   }
 }

@@ -17,6 +17,10 @@
           <q-icon name="group" class="sidebar__icon" />
           Members
         </router-link>
+        <router-link to="/advisory" class="sidebar__link">
+          <q-icon name="campaign" class="sidebar__icon" />
+          Advisory
+        </router-link>
         <router-link to="/admin" class="sidebar__link">
           <q-icon name="admin_panel_settings" class="sidebar__icon" />
           Admin
