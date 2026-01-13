@@ -2,7 +2,7 @@
   <div class="default-layout">
     <header class="layout-header" :class="{ 'header--shifted': sidebarOpen }">
       <button @click="sidebarOpen = !sidebarOpen" class="menu-toggle">☰</button>
-      <h1>Purok Lapad Bato</h1>
+      <img src="/logo.png" alt="Purok Lapad Bato Logo" class="logo" />
     </header>
     
     <Sidebar v-model="sidebarOpen" />
@@ -43,6 +43,7 @@ export default {
 .layout-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 1rem;
   background: #3498db;
   color: white;
@@ -70,6 +71,11 @@ export default {
   font-size: 0.9rem;
   cursor: pointer;
   padding: 0;
+}
+
+.logo {
+  height: 40px;
+  object-fit: contain;
 }
 
 .layout-content {

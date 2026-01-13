@@ -13,21 +13,13 @@
           <q-icon name="info" class="sidebar__icon" />
           About
         </router-link>
-        <router-link to="/services" class="sidebar__link">
-          <q-icon name="build" class="sidebar__icon" />
-          Services
+        <router-link to="/members" class="sidebar__link">
+          <q-icon name="group" class="sidebar__icon" />
+          Members
         </router-link>
-        <router-link to="/contact" class="sidebar__link">
-          <q-icon name="contact_mail" class="sidebar__icon" />
-          Contact
-        </router-link>
-        <router-link to="/profile" class="sidebar__link">
-          <q-icon name="account_circle" class="sidebar__icon" />
-          Profile
-        </router-link>
-        <router-link to="/settings" class="sidebar__link">
-          <q-icon name="settings" class="sidebar__icon" />
-          Settings
+        <router-link to="/admin" class="sidebar__link">
+          <q-icon name="admin_panel_settings" class="sidebar__icon" />
+          Admin
         </router-link>
       </slot>
     </nav>
