@@ -205,8 +205,8 @@ export default {
     return {
       isAuthenticated: false,
       credentials: {
-        username: '',
-        password: ''
+        username: 'lapadbato@gmail.com',
+        password: 'PurokLapadBato2026'
       },
       errorMessage: '',
       isLoading: false,
