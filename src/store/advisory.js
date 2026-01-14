@@ -1,28 +1,32 @@
 import { reactive } from 'vue'
-
-// Load advisories from localStorage or use empty array
-const savedAdvisories = JSON.parse(localStorage.getItem('purok-advisories') || '[]')
+import { db } from '@/config/firebase.js'
+import { collection, addDoc, deleteDoc, doc, onSnapshot } from 'firebase/firestore'
 
 export const advisoryStore = reactive({
-  advisories: savedAdvisories,
+  advisories: [],
   
-  addAdvisory(advisory) {
-    const newAdvisory = {
-      id: Date.now(),
+  init() {
+    const advisoriesRef = collection(db, 'advisories')
+    onSnapshot(advisoriesRef, (snapshot) => {
+      this.advisories = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+    })
+  },
+  
+  async addAdvisory(advisory) {
+    await addDoc(collection(db, 'advisories'), {
       title: advisory.title,
       content: advisory.content,
-      date: new Date().toLocaleDateString()
-    }
-    this.advisories.push(newAdvisory)
-    this.saveToStorage()
+      date: new Date().toLocaleDateString(),
+      createdAt: new Date().toISOString()
+    })
   },
   
-  removeAdvisory(id) {
-    this.advisories = this.advisories.filter(advisory => advisory.id !== id)
-    this.saveToStorage()
-  },
-  
-  saveToStorage() {
-    localStorage.setItem('purok-advisories', JSON.stringify(this.advisories))
+  async removeAdvisory(id) {
+    await deleteDoc(doc(db, 'advisories', id))
   }
 })
+
+advisoryStore.init()

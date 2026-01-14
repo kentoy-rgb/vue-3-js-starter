@@ -1,28 +1,32 @@
 import { reactive } from 'vue'
-
-// Load members from localStorage or use empty array
-const savedMembers = JSON.parse(localStorage.getItem('purok-members') || '[]')
+import { db } from '@/config/firebase.js'
+import { collection, addDoc, deleteDoc, doc, onSnapshot } from 'firebase/firestore'
 
 export const memberStore = reactive({
-  members: savedMembers,
+  members: [],
   
-  addMember(member) {
-    const newMember = {
-      id: Date.now(),
+  init() {
+    const membersRef = collection(db, 'members')
+    onSnapshot(membersRef, (snapshot) => {
+      this.members = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+    })
+  },
+  
+  async addMember(member) {
+    await addDoc(collection(db, 'members'), {
       name: member.name,
       role: member.role,
-      photo: member.photo
-    }
-    this.members.push(newMember)
-    this.saveToStorage()
+      photo: member.photo,
+      createdAt: new Date().toISOString()
+    })
   },
   
-  removeMember(id) {
-    this.members = this.members.filter(member => member.id !== id)
-    this.saveToStorage()
-  },
-  
-  saveToStorage() {
-    localStorage.setItem('purok-members', JSON.stringify(this.members))
+  async removeMember(id) {
+    await deleteDoc(doc(db, 'members', id))
   }
 })
+
+memberStore.init()
