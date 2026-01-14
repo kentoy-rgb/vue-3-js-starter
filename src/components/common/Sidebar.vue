@@ -9,6 +9,10 @@
           <q-icon name="home" class="sidebar__icon" />
           Home
         </router-link>
+        <router-link to="/mvg" class="sidebar__link">
+          <q-icon name="business" class="sidebar__icon" />
+          MVG
+        </router-link>
         <router-link to="/about" class="sidebar__link">
           <q-icon name="info" class="sidebar__icon" />
           About
