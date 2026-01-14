@@ -9,13 +9,13 @@
           <div class="card-body">
             <form @submit.prevent="login">
               <div class="form-group">
-                <label for="username">Username</label>
-                <input 
-                  type="text" 
-                  id="username" 
-                  v-model="credentials.username" 
+                <label for="username">Email</label>
+                <input
+                  type="email"
+                  id="username"
+                  v-model="credentials.username"
                   class="form-input"
-                  placeholder="Enter username"
+                  placeholder="Enter email"
                   required
                 />
               </div>
@@ -192,7 +192,8 @@
 </template>
 
 <script>
-import authConfig from '@/config/auth.js'
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
+import { auth } from '@/config/firebase.js'
 import { adminStore } from '@/store/admin.js'
 import { advisoryStore } from '@/store/advisory.js'
 import { memberStore } from '@/store/members.js'
@@ -262,35 +263,54 @@ export default {
       deep: true
     }
   },
+  mounted() {
+    // Listen to Firebase auth state changes
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.isAuthenticated = true
+        adminStore.login()
+      } else {
+        this.isAuthenticated = false
+        adminStore.logout()
+        this.activeSection = null
+      }
+    })
+  },
   methods: {
-    login() {
+    async login() {
       this.isLoading = true
-      
-      // Simulate loading delay
-      setTimeout(() => {
-        if (this.credentials.username === authConfig.admin.username && 
-            this.credentials.password === authConfig.admin.password) {
-          this.isAuthenticated = true
-          adminStore.login()
-          this.errorMessage = ''
-          this.credentials = { username: '', password: '' }
-        } else {
-          this.errorMessage = 'Invalid username or password'
-        }
+      this.errorMessage = ''
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          this.credentials.username,
+          this.credentials.password
+        )
+        this.isAuthenticated = true
+        adminStore.login()
+        this.credentials = { username: '', password: '' }
+      } catch (error) {
+        console.error('Login error:', error)
+        this.errorMessage = 'Invalid username or password'
+      } finally {
         this.isLoading = false
-      }, 1500)
+      }
     },
-    logout() {
+    async logout() {
       this.isLoading = true
-      
-      // Simulate loading delay
-      setTimeout(() => {
+
+      try {
+        await signOut(auth)
         this.isAuthenticated = false
         adminStore.logout()
         this.credentials = { username: '', password: '' }
         this.activeSection = null
+      } catch (error) {
+        console.error('Logout error:', error)
+      } finally {
         this.isLoading = false
-      }, 1000)
+      }
     },
     openContentEditor() {
       this.activeSection = 'content'

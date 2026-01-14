@@ -1,6 +1,6 @@
 export default {
   admin: {
-    username: 'Khineth',
-    password: 'Kentoy2004'
+    username: 'PurokLapadBato',
+    password: 'PurokLapadBato2026'
   }
 }
