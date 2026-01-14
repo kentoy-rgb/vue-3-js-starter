@@ -96,15 +96,27 @@
               </div>
               
               <div v-if="activeSection === 'content'" class="content-editor">
+                <h3>Edit Home Page</h3>
                 <div class="editor-group">
-                  <label>Page Title:</label>
-                  <input v-model="editableContent.title" class="editor-input" />
+                  <label>Home Title:</label>
+                  <input v-model="editableContent.home.title" class="editor-input" />
                 </div>
                 <div class="editor-group">
-                  <label>Page Content:</label>
-                  <textarea v-model="editableContent.content" class="editor-textarea" rows="8"></textarea>
+                  <label>Home Content:</label>
+                  <textarea v-model="editableContent.home.content" class="editor-textarea" rows="4"></textarea>
                 </div>
-                <button @click="saveContent" class="save-btn">Save Changes</button>
+                
+                <h3 style="margin-top: 2rem;">Edit About Page</h3>
+                <div class="editor-group">
+                  <label>About Title:</label>
+                  <input v-model="editableContent.about.title" class="editor-input" />
+                </div>
+                <div class="editor-group">
+                  <label>About Content:</label>
+                  <textarea v-model="editableContent.about.content" class="editor-textarea" rows="4"></textarea>
+                </div>
+                
+                <button @click="saveContent" class="save-btn">Save All Changes</button>
               </div>
               
               <div v-if="activeSection === 'members'" class="members-manager">
@@ -184,6 +196,7 @@ import authConfig from '@/config/auth.js'
 import { adminStore } from '@/store/admin.js'
 import { advisoryStore } from '@/store/advisory.js'
 import { memberStore } from '@/store/members.js'
+import { contentStore } from '@/store/content.js'
 
 export default {
   name: 'Admin',
@@ -198,8 +211,8 @@ export default {
       isLoading: false,
       activeSection: null,
       editableContent: {
-        title: 'Purok Lapad Bato',
-        content: 'Welcome to our community website.'
+        home: { title: '', content: '' },
+        about: { title: '', content: '' }
       },
       newMember: { name: '', role: '', photo: null, photoPreview: null },
       newAdvisory: { title: '', content: '' },
@@ -225,6 +238,28 @@ export default {
     },
     members() {
       return memberStore.members
+    },
+    homeContent() {
+      return contentStore.home
+    },
+    aboutContent() {
+      return contentStore.about
+    }
+  },
+  watch: {
+    homeContent: {
+      handler(val) {
+        this.editableContent.home = { ...val }
+      },
+      immediate: true,
+      deep: true
+    },
+    aboutContent: {
+      handler(val) {
+        this.editableContent.about = { ...val }
+      },
+      immediate: true,
+      deep: true
     }
   },
   methods: {
@@ -276,6 +311,10 @@ export default {
       this.activeSection = null
     },
     saveContent() {
+      contentStore.home = { ...this.editableContent.home }
+      contentStore.about = { ...this.editableContent.about }
+      contentStore.saveHome()
+      contentStore.saveAbout()
       alert('Content saved successfully!')
     },
     addMember() {
