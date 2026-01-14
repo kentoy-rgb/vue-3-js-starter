@@ -27,16 +27,25 @@ export default {
 
 <style scoped>
 .mvg {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  height: 90vh;
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  box-sizing: border-box;
+  font-family: 'Old English Text MT', 'Blackletter', serif;
 }
 
 .mvg-section {
-  margin-bottom: 3rem;
+  margin-bottom: 0;
   padding: 2rem;
   border-radius: 8px;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  height: calc(70vh - 2rem);
+  flex: 1;
 }
 
 .mvg-section h2 {
@@ -56,33 +65,37 @@ export default {
 }
 
 .mission h2 {
-  background: #d4af37;
+  background: #56d437;
   color: #2c3e50;
 }
 
 .vision h2 {
-  background: #d4af37;
+  background: #56d437;
   color: #2c3e50;
 }
 
 .goals h2 {
-  background: #d4af37;
+  background: #56d437;
   color: #2c3e50;
 }
 
 @media (max-width: 768px) {
   .mvg {
     padding: 1rem;
+    flex-direction: column;
+    height: auto;
   }
-  
+
   .mvg-section {
     padding: 1.5rem;
+    height: auto;
+    margin-bottom: 1rem;
   }
-  
+
   .mvg-section h2 {
     font-size: 1.5rem;
   }
-  
+
   .mvg-section p {
     font-size: 1rem;
   }

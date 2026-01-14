@@ -9,7 +9,7 @@
           <q-icon name="home" class="sidebar__icon" />
           Home
         </router-link>
-        <router-link to="/mvg" class="sidebar__link">
+        <router-link to="/mvg" class="sidebar__link mvg-link">
           <q-icon name="business" class="sidebar__icon" />
           MVG
         </router-link>
@@ -140,22 +140,29 @@ export default {
     width: 250px;
     left: -250px;
   }
-  
+
   .sidebar--open {
     left: 0 !important;
   }
-  
+
   .sidebar__header h3 {
     font-size: 1.5rem;
   }
-  
+
   .sidebar__link {
     padding: 1rem 1.5rem;
     font-size: 1.1rem;
   }
-  
+
   .sidebar__icon {
     font-size: 1.1rem;
   }
+}
+
+.mvg-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
 }
 </style>
