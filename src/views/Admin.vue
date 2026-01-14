@@ -523,7 +523,7 @@ export default {
 
 .management-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -535,6 +535,9 @@ export default {
   padding: 1.5rem;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
 }
 
 .management-card:hover {
@@ -550,12 +553,17 @@ export default {
 .management-card h3 {
   margin: 0 0 0.5rem 0;
   color: #2c3e50;
+  font-size: 1.1rem;
+  word-wrap: break-word;
 }
 
 .management-card p {
   color: #6c757d;
   margin-bottom: 1rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  flex: 1;
+  word-wrap: break-word;
+  line-height: 1.4;
 }
 
 .action-btn {
@@ -566,6 +574,9 @@ export default {
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  margin-top: auto;
 }
 
 .action-btn:hover {
@@ -935,5 +946,210 @@ export default {
 .slide-fade-leave-to {
   opacity: 0;
   transform: translateY(-10px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .admin {
+    min-height: auto;
+    padding: 0;
+  }
+  
+  .login-container {
+    padding: 0.5rem;
+    max-width: 100%;
+  }
+  
+  .login-card {
+    border-radius: 8px;
+  }
+  
+  .card-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .card-body {
+    padding: 1.5rem 1rem;
+  }
+  
+  .form-input {
+    font-size: 16px;
+  }
+  
+  .admin-panel {
+    border-radius: 0;
+    width: 100vw;
+    margin: 0;
+  }
+  
+  .panel-header {
+    padding: 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .panel-header h1 {
+    font-size: 1.1rem;
+    flex: 1;
+  }
+  
+  .logout-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .panel-content {
+    padding: 0.75rem;
+    overflow-x: hidden;
+  }
+  
+  .management-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .management-card {
+    padding: 1rem;
+    min-width: 0;
+  }
+  
+  .card-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .management-card h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .management-card p {
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .action-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .section-content {
+    padding: 0.75rem;
+  }
+  
+  .section-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .section-header h2 {
+    font-size: 1rem;
+    flex: 1;
+  }
+  
+  .close-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .compact-input,
+  .compact-file {
+    width: 100%;
+    font-size: 14px;
+  }
+  
+  .compact-btn {
+    width: 100%;
+    padding: 0.6rem;
+  }
+  
+  .compact-member {
+    padding: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .member-info {
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .tiny-photo {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+  }
+  
+  .member-details {
+    min-width: 0;
+    overflow: hidden;
+  }
+  
+  .member-name {
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .member-role {
+    font-size: 0.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .tiny-remove {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+  
+  .advisory-item {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+  
+  .advisory-content h4 {
+    font-size: 0.95rem;
+  }
+  
+  .advisory-content p {
+    font-size: 0.85rem;
+  }
+  
+  .remove-btn {
+    align-self: flex-end;
+    font-size: 0.75rem;
+  }
+  
+  .editor-input,
+  .editor-textarea {
+    font-size: 14px;
+    padding: 0.6rem;
+  }
+  
+  .save-btn,
+  .add-btn,
+  .deploy-btn {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .editor-group h3,
+  .setting-group h3 {
+    font-size: 1rem;
+  }
 }
 </style>

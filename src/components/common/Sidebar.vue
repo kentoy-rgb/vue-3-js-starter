@@ -130,4 +130,24 @@ export default {
 .sidebar__link:hover {
   background: #34495e;
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 250px;
+    left: -250px;
+  }
+  
+  .sidebar__header h3 {
+    font-size: 1.5rem;
+  }
+  
+  .sidebar__link {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .sidebar__icon {
+    font-size: 1.1rem;
+  }
+}
 </style>

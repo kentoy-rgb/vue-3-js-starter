@@ -93,4 +93,26 @@ export default {
 .content--shifted {
   margin-left: 300px;
 }
+
+@media (max-width: 768px) {
+  .layout-header {
+    padding: 0.75rem;
+  }
+  
+  .header--shifted {
+    margin-left: 0;
+  }
+  
+  .logo {
+    height: 30px;
+  }
+  
+  .layout-content {
+    padding: 1rem;
+  }
+  
+  .content--shifted {
+    margin-left: 0;
+  }
+}
 </style>

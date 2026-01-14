@@ -48,4 +48,18 @@ export default {
   color: #6c757d;
   line-height: 1.8;
 }
+
+@media (max-width: 768px) {
+  .about {
+    padding: 1rem;
+  }
+  
+  .about-header h1 {
+    font-size: 2rem;
+  }
+  
+  .about-content {
+    font-size: 1rem;
+  }
+}
 </style>
