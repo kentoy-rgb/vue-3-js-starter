@@ -133,24 +133,24 @@ export default {
 }
 
 .photo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
   object-fit: cover;
   border: 4px solid #3498db;
   box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
 }
 
 .default-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
   background: linear-gradient(135deg, #3498db, #2980b9);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   font-weight: 700;
   box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
 }
