@@ -73,7 +73,7 @@ export default {
 }
 
 .sidebar--open {
-  left: 0;
+  left: 0 !important;
 }
 
 .sidebar__header {
@@ -135,6 +135,10 @@ export default {
   .sidebar {
     width: 250px;
     left: -250px;
+  }
+  
+  .sidebar--open {
+    left: 0 !important;
   }
   
   .sidebar__header h3 {

@@ -1,7 +1,14 @@
 <template>
   <div class="default-layout">
+    <div v-if="sidebarOpen && !isAdminAuthenticated" class="overlay" @click="closeSidebar"></div>
+    
     <header class="layout-header" :class="{ 'header--shifted': sidebarOpen && !isAdminAuthenticated }">
-      <button v-if="!isAdminAuthenticated" @click="sidebarOpen = !sidebarOpen" class="menu-toggle">☰</button>
+      <button 
+        v-if="!isAdminAuthenticated" 
+        @click="toggleSidebar" 
+        @touchend.prevent="toggleSidebar"
+        class="menu-toggle"
+      >☰</button>
       <img src="/logo.png" alt="Purok Lapad Bato Logo" class="logo" />
     </header>
     
@@ -11,7 +18,7 @@
       <slot />
     </main>
     
-    <Footer />
+    <Footer :class="{ 'footer--shifted': sidebarOpen && !isAdminAuthenticated }" />
   </div>
 </template>
 
@@ -35,6 +42,14 @@ export default {
     isAdminAuthenticated() {
       return adminStore.isAuthenticated
     }
+  },
+  methods: {
+    toggleSidebar() {
+      this.sidebarOpen = !this.sidebarOpen
+    },
+    closeSidebar() {
+      this.sidebarOpen = false
+    }
   }
 }
 </script>
@@ -57,6 +72,8 @@ export default {
   height: 60px;
   box-sizing: border-box;
   transition: margin-left 0.3s ease;
+  position: relative;
+  z-index: 1001;
 }
 
 .header--shifted {
@@ -74,9 +91,18 @@ export default {
   background: none;
   border: none;
   color: white;
-  font-size: 0.9rem;
+  font-size: 2rem;
   cursor: pointer;
-  padding: 0;
+  padding: 0.75rem;
+  line-height: 1;
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
+  user-select: none;
 }
 
 .logo {
@@ -94,13 +120,32 @@ export default {
   margin-left: 300px;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.footer--shifted {
+  margin-left: 300px;
+  transition: margin-left 0.3s ease;
+}
+
 @media (max-width: 768px) {
   .layout-header {
     padding: 0.75rem;
   }
   
   .header--shifted {
-    margin-left: 0;
+    margin-left: 250px;
+  }
+  
+  .menu-toggle {
+    font-size: 2.5rem;
   }
   
   .logo {
@@ -113,6 +158,10 @@ export default {
   
   .content--shifted {
     margin-left: 0;
+  }
+  
+  .footer--shifted {
+    margin-left: 250px;
   }
 }
 </style>
