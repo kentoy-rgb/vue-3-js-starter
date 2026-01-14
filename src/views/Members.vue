@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="member-info">
-            <h3 class="member-name">{{ member.name }}</h3>
+            <h3 class="member-name">Community Member</h3>
             <p class="member-role">{{ member.role }}</p>
           </div>
         </div>
